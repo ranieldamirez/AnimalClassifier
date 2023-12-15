@@ -1,0 +1,8 @@
+----- 11-25-2023 -----
+
+Time to train model: 59.9 minutes
+# of training images: 26,208
+Testing Accuracy: 52.08%
+
+COMMENTS: 
+- Testing 10 images per animal
