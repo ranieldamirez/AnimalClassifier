@@ -28,12 +28,23 @@ class SimpleCNN(nn.Module):
         x = self.fc2(x)
         return x
 
-#set device to apple silicon
-device = torch.device('mps')
+def get_device():
+    if torch.backends.mps.is_available():  # Hypothetical check for MPS
+        return torch.device("mps")  # Hypothetical MPS device
+    elif torch.cuda.is_available():
+        return torch.device("cuda")
+    else:
+        return torch.device("cpu")
+
+
 
 def train_model():
     start = time.time()
     print("\nTRAINING MODEL\n")
+
+    device = get_device()
+    print(f"\n Using device: {device}")
+
     # Instantiate the model, loss function, and optimizer
     model = SimpleCNN().to(device)
     try:

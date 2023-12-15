@@ -5,13 +5,21 @@ from torch.utils.data import DataLoader
 import torchvision.datasets as datasets
 
 
+def get_device():
+    if torch.backends.mps.is_available():  # Hypothetical check for MPS
+        return torch.device("mps")  # Hypothetical MPS device
+    elif torch.cuda.is_available():
+        return torch.device("cuda")
+    else:
+        return torch.device("cpu")
+
 def test_model():
     start = time.time()
     # inherit Class from training script
     from train import SimpleCNN
 
     # Load the trained model
-    device = torch.device('mps')
+    device = get_device()
     model = SimpleCNN().to(device)
     model.load_state_dict(torch.load('tensor.pt'))
     model.eval()
